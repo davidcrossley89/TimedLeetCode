@@ -1,0 +1,31 @@
+public class Solution {
+    public bool CanWinNim(int n) {
+        if (n == 1){return true;}
+        else if (n%4 ==0) return false;
+        return true;
+    }
+}
+
+
+public class Solution {
+    public int HammingDistance(int x, int y) {
+        int remainder = 2;
+        int ans = 0 ;
+        while ( max(x,y)>0){
+			int XRemainder = x%remainder;
+			int YRemainder - y%remainder;
+            if(XRemainder != YRemainder){
+                ans ++;
+				}
+			x = x- (remainder*XRemainder));
+            y = y- (remainder*YRemainder);
+            remainder ++;
+            }
+        return ans;
+        
+        }
+    public int max(int x, int y){
+        if(x>= y){return x;}
+        return y;
+    }
+}
