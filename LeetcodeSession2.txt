@@ -1,0 +1,51 @@
+public class Solution {
+    public int NetworkDelayTime(int[][] times, int N, int K) {
+        List<int> visited = new List<int>(K) ;
+        int timeToComplete = TravelTo(times, visited, K,0);
+        if (timeToComplete > -1){return timeToComplete+1;}
+        else return -1;
+    }
+    public int TravelTo(int[][] times,List<int> visited, int start, int time){
+        int MaxTime = time;
+        int TimeToComplete =time;
+        bool IsPossible = false;
+        foreach(int[] node in times){
+            if(node[0] == start && !visited.Contains(node[1])){
+                IsPossible = true;
+                visited.Add(node[1]);
+                TimeToComplete = TravelTo(times,visited, node[1],time+node[2]);
+                if(TimeToComplete > MaxTime){ MaxTime = TimeToComplete;}
+            }
+        }
+        if(IsPossible){return MaxTime;}
+        else return -1;
+    }
+        
+        
+    }
+	
+	public class Solution {
+    public bool CheckRecord(string s) {
+        char[] attendance = s.ToCharArray();
+        int a = 0;
+        int l = 0;
+        bool reward = true;
+        foreach (char letter in attendance){
+            switch(letter){
+                case 'A':
+                    a++;
+                    l = 0;
+                    if (a>=2) {reward = false;}
+                    break;
+                case 'L':
+                    l++;
+                    if (l>=3){reward = false;}
+                    break;
+                case 'P':
+                    l=0;
+                    break;
+            }
+        }
+        return reward;
+    }
+}
