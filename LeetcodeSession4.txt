@@ -1,0 +1,46 @@
+We have two special characters. The first character can be represented by one bit 0. The second character can be represented by two bits (10 or 11).
+
+Now given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.
+
+public class Solution {
+    public bool IsOneBitCharacter(int[] bits) {
+        if (bits.Length ==1){
+            if(bits[0] == 1){return false;}
+            else return true;
+        }
+        
+        int first = 0;
+        while (first <bits.Length-1){
+            first = first+1+(bits[first]);
+            
+        }
+        return(first == bits.Length-1);
+    }
+}
+
+Design a class to find the kth largest element in a stream. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+Your KthLargest class will have a constructor which accepts an integer k and an integer array nums, which contains initial elements from the stream. For each call to the method KthLargest.add, return the element representing the kth largest element in the stream.
+public class KthLargest {
+
+        public int k {get;set;}
+        public static int[] kth {get;set;}
+    public bool first =true;
+     
+    public KthLargest(int k, int[] nums) {
+        Array.Sort(nums);
+        int length = nums.Length;
+        kth = new int[k];
+        if(length>0){Array.Copy(nums, length-k,kth,0,k);}
+        
+    }
+    
+    public int Add(int val) {
+        if (val > kth[0]){
+            kth[0] = val;
+            Array.Sort(kth);
+            
+        }
+        return kth[0];
+        }
+    }
