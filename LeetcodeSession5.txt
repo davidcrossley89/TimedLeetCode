@@ -1,0 +1,97 @@
+public class NumArray {
+    public int[] arrayNums {get;set;}
+    
+    public NumArray(int[] nums) {
+        arrayNums = nums;
+    }
+    
+    public void Update(int i, int val) {
+        if (i < arrayNums.Length){
+            arrayNums[i]=val;
+        }
+    }
+    
+    public int SumRange(int i, int j) {
+        int sum =0;
+        if (i < arrayNums.Length){
+            for(int index = i; index <= j; index ++){
+                sum = sum +arrayNums[index];
+            }
+        }
+        return sum;
+    }
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.Update(i,val);
+ * int param_2 = obj.SumRange(i,j);
+ */
+ Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
+
+The update(i, val) function modifies nums by updating the element at index i to val.
+
+
+Given an array of 4 digits, return the largest 24 hour time that can be made.
+
+The smallest 24 hour time is 00:00, and the largest is 23:59.  Starting from 00:00, a time is larger if more time has elapsed since midnight.
+
+Return the answer as a string of length 5.  If no valid time can be made, return an empty string.
+
+public class Solution {
+    public string LargestTimeFromDigits(int[] A) {
+        string answer = "";
+        int[] firstDigit = {2,1,0};
+        int[] secondDigitA = {3,2,1,0};
+        int[] secondDigitB = {9,8,7,6,5,4,3,2,1,0};
+        int[] thirdDigit = {5,4,3,2,1,0};           
+        int[] fourthDigit = {9,8,7,6,5,4,3,2,1,0}; 
+        foreach(int first in firstDigit){
+            if(Array.Exists(A, num => num == first)){
+                answer = first.ToString();
+                int indexOne = Array.IndexOf(A,first);
+                A[indexOne] = 10;
+                break;
+            }
+        }
+        if(answer == "2") {
+            foreach(int second in secondDigitA){
+                if(Array.Exists(A, num => num == second)){
+                    answer = answer+ second.ToString();
+                    int indexTwoA = Array.IndexOf(A,second);
+                    A[indexTwoA] = 10;
+                    break;
+                    }
+                }
+        }
+        else{
+            foreach(int second in secondDigitB){
+                if(Array.Exists(A, num => num == second)){
+                    answer = answer+ second.ToString();
+                    int indexTwoB = Array.IndexOf(A,second);
+                    A[indexTwoB] = 10;
+                    break;
+                    }
+                }
+        }
+        foreach(int third in thirdDigit){
+                if(Array.Exists(A, num => num == third)){
+                    answer = answer+ ':'+third.ToString();
+                    int indexThree = Array.IndexOf(A,third);
+                    A[indexThree] = 10;
+                    break;
+                    }
+                }
+        foreach(int fourth in fourthDigit){
+                if(Array.Exists(A, num => num == fourth)){
+                    answer = answer+ fourth.ToString();
+                    int indexFour = Array.IndexOf(A,fourth);
+                    A[indexFour] = 10;
+                    break;
+                    }
+                }
+        if(answer.Length ==5){return answer;}
+        else {return "";}
+    }
+}
